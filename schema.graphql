@@ -3,6 +3,28 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Comment {
+  _id: ID!
+  createdAt: DateTimeISO!
+  description: String!
+  post: Post
+  user: User!
+}
+
+input CreateCommentInput {
+  description: String!
+  post: String!
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
+"""
+scalar DateTimeISO
+
+type Mutation {
+  createComment(CreateCommentInput: CreateCommentInput!): Comment!
+}
+
 type Post {
   _id: ID!
   category: String!
@@ -12,6 +34,9 @@ type Post {
 }
 
 type Query {
+  comments(skip: Int = 0, take: Int): [Comment!]!
+  getUserByEmail(email: String!): User!
+  getUserToken(email: String!, password: String!): String!
   posts: [Post!]!
   users: [User!]!
 }
