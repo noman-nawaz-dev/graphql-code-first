@@ -15,10 +15,8 @@ import {
   LogAccess,
   ResolveTime,
 } from "../middleware/middleware";
-import {
-  RootSelectedFields,
-  ValidateArgs,
-} from "../decorators/customDecorators";
+import { RootSelectedFields } from "../decorators/RootSelectedFields.decorator";
+import { ValidateArgs } from "../decorators/ValidateArgs.decorator";
 
 @Service()
 @Resolver(() => User)
