@@ -17,6 +17,6 @@ export class LoginArgs {
 @ArgsType()
 export class EmailInput {
   @Field()
-  @IsEmail()
+  @IsEmail({}, { message: "Invalid email format" })
   email: string;
 }
