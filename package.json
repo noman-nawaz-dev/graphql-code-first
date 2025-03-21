@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "NODE_ENV=dev nodemon --watch 'src/**/*' src/app.ts",
     "build": "tsc",
-    "start": "NODE_ENV=prod node dist/app.js",
+    "start": "npm run build && NODE_ENV=prod node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -26,6 +26,7 @@
     "bcryptjs": "^3.0.2",
     "class-validator": "^0.14.1",
     "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "graphql": "^16.10.0",
@@ -35,6 +36,7 @@
     "path": "^0.12.7",
     "reflect-metadata": "^0.2.2",
     "type-graphql": "^2.0.0-rc.2",
-    "typedi": "^0.10.0"
+    "typedi": "^0.10.0",
+    "winston": "^3.17.0"
   }
 }
