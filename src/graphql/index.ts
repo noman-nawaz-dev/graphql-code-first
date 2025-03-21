@@ -7,6 +7,7 @@ import { registerEnumType } from "type-graphql";
 import { UserRole } from "./enums/user-role.enum";
 import { Context } from "./interfaces/context.interface";
 import { CustomAuthChecker } from "../auth/customAuthChecker";
+import { LogAccess, ResolveTime } from "./middleware/middleware";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import Container from "typedi";
 import path from "path";
@@ -23,6 +24,7 @@ async function bootstrapSchema() {
     resolvers: [UserResolver, PostResolver, CommentResolver],
     container: Container,
     authChecker: CustomAuthChecker,
+    // globalMiddlewares: [LogAccess, ResolveTime],
     validate: true,
     emitSchemaFile: {
       path: path.resolve(__dirname, "../../schema.graphql"),
