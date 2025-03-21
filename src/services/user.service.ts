@@ -5,8 +5,8 @@ import { Service } from "typedi";
 
 @Service()
 export class UserService {
-  async getUsers() {
-    return await User.find({});
+  async getUsers(fields: Record<string, 1>) {
+    return await User.find({}, fields);
   }
 
   async getUserById(id: string) {
@@ -14,12 +14,12 @@ export class UserService {
     return user;
   }
 
-  async getUserByEmail(email: string) {
-    return await User.findOne({ email });
+  async getUserByEmail(email: string, fields: Record<string, 1>) {
+    return await User.findOne({ email }, fields);
   }
 
   async getUserToken(email: string, password: string) {
-    const user = await this.getUserByEmail(email);
+    const user = await this.getUserByEmail(email, { password: 1 });
     if (!user) {
       throw new Error("User with this email not found");
     }

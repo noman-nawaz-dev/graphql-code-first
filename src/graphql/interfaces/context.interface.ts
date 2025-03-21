@@ -9,3 +9,10 @@ export interface PostDocument {
   description: string;
   user: string;
 }
+
+export interface CurrentUser {
+  _id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}

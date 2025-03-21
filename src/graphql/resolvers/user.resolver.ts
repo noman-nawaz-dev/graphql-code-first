@@ -15,6 +15,7 @@ import {
   LogAccess,
   ResolveTime,
 } from "../middleware/middleware";
+import { rootSelectedFields } from "../decorators/customDecorators";
 
 @Service()
 @Resolver(() => User)
@@ -22,8 +23,8 @@ export class UserResolver {
   constructor(private userService: UserService) {}
   @UseMiddleware(ResolveTime, LogAccess, ErrorInterceptor)
   @Query((returns) => [User])
-  async users() {
-    return await this.userService.getUsers();
+  async users(@rootSelectedFields() fields: Record<string, 1>) {
+    return await this.userService.getUsers(fields);
   }
 
   @UseMiddleware(ResolveTime, LogAccess, ErrorInterceptor)
@@ -33,7 +34,10 @@ export class UserResolver {
   }
   @UseMiddleware(ResolveTime, LogAccess, ErrorInterceptor)
   @Query((returns) => User)
-  async getUserByEmail(@Args() { email }: EmailInput) {
-    return await this.userService.getUserByEmail(email);
+  async getUserByEmail(
+    @Args() { email }: EmailInput,
+    @rootSelectedFields() fields: Record<string, 1>
+  ) {
+    return await this.userService.getUserByEmail(email, fields);
   }
 }
